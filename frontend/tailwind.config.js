@@ -5,7 +5,7 @@ module.exports = {
     "./pages/**/*.{js,jsx}",
     "./components/**/*.{js,jsx}",
     "./app/**/*.{js,jsx}",
-    "./src/**/*.{js,jsx}"
+    "./src/**/*.{js,jsx}",
   ],
   prefix: "",
   theme: {
@@ -75,8 +75,13 @@ module.exports = {
         },
       },
       fontFamily: {
-        heading: ["Fbspoilerpaseng", "Roboto", "sans-serif"],
-        body: ["Roboto", "sans-serif"],
+        heading: [
+          "Cabinet Grotesk",
+          "Plus Jakarta Sans",
+          "system-ui",
+          "sans-serif",
+        ],
+        body: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
       },
       spacing: {
         section: "var(--spacing-section)",

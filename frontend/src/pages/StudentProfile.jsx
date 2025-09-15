@@ -98,57 +98,60 @@ const StudentProfile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       {/* Header */}
       <div className="border-b border-border bg-card">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Link to="/student-dashboard" className="flex items-center space-x-2">
+        <div className="w-full max-w-none px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-between min-w-0">
+            <div className="flex items-center space-x-2 sm:space-x-4 min-w-0 flex-1">
+              <Link to="/student-dashboard" className="flex items-center space-x-2 flex-shrink-0">
                 <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-sm">CM</span>
+                  <span className="text-primary-foreground font-bold text-sm">ET</span>
                 </div>
-                <span className="font-heading text-xl font-bold text-foreground">ClassMate</span>
+                <span className="font-heading text-lg sm:text-xl font-bold text-foreground hidden sm:block">EduTest</span>
               </Link>
-              <div className="h-6 w-px bg-border"></div>
-              <h1 className="font-heading text-2xl font-bold text-foreground">My Profile</h1>
+              <div className="h-6 w-px bg-border hidden sm:block"></div>
+              <h1 className="font-heading text-xl sm:text-2xl font-bold text-foreground truncate">My Profile</h1>
             </div>
-            <Link to="/student-dashboard">
-              <Button variant="outline">Back to Dashboard</Button>
+            <Link to="/student-dashboard" className="flex-shrink-0">
+              <Button variant="outline" size="sm" className="text-xs sm:text-sm">
+                <span className="hidden sm:inline">Back to Dashboard</span>
+                <span className="sm:hidden">Back</span>
+              </Button>
             </Link>
           </div>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-4 md:py-8">
-        <div className="grid lg:grid-cols-3 gap-6 md:gap-8">
+      <div className="w-full max-w-none px-4 sm:px-6 lg:px-8 py-4 md:py-8">
+        <div className="grid lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-none">
           {/* Profile Overview */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="lg:col-span-1 space-y-4 sm:space-y-6 order-2 lg:order-1">
             {/* Profile Card */}
-            <Card className="card-premium">
-              <CardContent className="p-6">
+            <Card className="card-premium overflow-hidden">
+              <CardContent className="p-4 sm:p-6">
                 <div className="text-center">
                   <div className="relative inline-block mb-4">
-                    <Avatar className="w-24 h-24 mx-auto">
+                    <Avatar className="w-20 h-20 sm:w-24 sm:h-24 mx-auto">
                       <AvatarImage src={profileData.avatar} />
-                      <AvatarFallback className="text-2xl bg-primary/10 text-primary">
+                      <AvatarFallback className="text-xl sm:text-2xl bg-primary/10 text-primary font-heading">
                         {profileData.name.split(' ').map(n => n[0]).join('')}
                       </AvatarFallback>
                     </Avatar>
-                    <Button size="sm" className="absolute bottom-0 right-0 rounded-full w-8 h-8 p-0">
+                    <Button size="sm" className="absolute bottom-0 right-0 rounded-full w-8 h-8 p-0 shadow-lg">
                       <Camera className="h-4 w-4" />
                     </Button>
                   </div>
-                  <h2 className="font-heading text-xl font-bold text-foreground mb-1">{profileData.name}</h2>
-                  <p className="text-muted-foreground mb-4">{profileData.email}</p>
-                  <div className="space-y-2 text-sm text-muted-foreground">
+                  <h2 className="font-heading text-lg sm:text-xl font-bold text-foreground mb-1">{profileData.name}</h2>
+                  <p className="text-muted-foreground mb-4 text-sm sm:text-base break-all">{profileData.email}</p>
+                  <div className="space-y-2 text-xs sm:text-sm text-muted-foreground">
                     <div className="flex items-center justify-center space-x-2">
-                      <Calendar className="h-4 w-4" />
-                      <span>Joined {profileData.joinDate}</span>
+                      <Calendar className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
+                      <span className="truncate">Joined {profileData.joinDate}</span>
                     </div>
                     <div className="flex items-center justify-center space-x-2">
-                      <MapPin className="h-4 w-4" />
-                      <span>{profileData.location}</span>
+                      <MapPin className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
+                      <span className="truncate">{profileData.location}</span>
                     </div>
                   </div>
                 </div>
@@ -157,15 +160,15 @@ const StudentProfile = () => {
 
             {/* Stats Overview */}
             <Card className="card-premium">
-              <CardHeader>
-                <CardTitle>Statistics</CardTitle>
+              <CardHeader className="pb-3">
+                <CardTitle className="font-heading text-base sm:text-lg">Statistics</CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
+              <CardContent className="pt-0">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
                   {stats.map((stat, index) => (
-                    <div key={index} className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">{stat.label}</span>
-                      <span className={`font-semibold ${stat.color}`}>{stat.value}</span>
+                    <div key={index} className="text-center p-3 bg-muted/30 rounded-lg">
+                      <div className={`text-lg sm:text-xl font-bold font-heading ${stat.color} mb-1`}>{stat.value}</div>
+                      <div className="text-xs sm:text-sm text-muted-foreground leading-tight">{stat.label}</div>
                     </div>
                   ))}
                 </div>
@@ -174,22 +177,22 @@ const StudentProfile = () => {
 
             {/* Recent Achievements */}
             <Card className="card-premium">
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <Award className="h-5 w-5 text-info" />
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center space-x-2 text-base sm:text-lg font-heading">
+                  <Award className="h-4 w-4 sm:h-5 sm:w-5 text-info flex-shrink-0" />
                   <span>Recent Achievements</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pt-0">
                 <div className="space-y-3">
                   {achievements.slice(0, 3).map((achievement, index) => (
-                    <div key={index} className="flex items-center space-x-3 animate-fade-in">
-                      <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-                        <achievement.icon className={`h-4 w-4 ${achievement.color}`} />
+                    <div key={index} className="flex items-start space-x-3 animate-fade-in">
+                      <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <achievement.icon className={`h-3 w-3 sm:h-4 sm:w-4 ${achievement.color}`} />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-foreground truncate">{achievement.name}</p>
-                        <p className="text-xs text-muted-foreground">{achievement.date}</p>
+                        <p className="text-xs sm:text-sm font-medium text-foreground leading-tight">{achievement.name}</p>
+                        <p className="text-xs text-muted-foreground mt-1">{achievement.date}</p>
                       </div>
                     </div>
                   ))}
@@ -199,25 +202,25 @@ const StudentProfile = () => {
           </div>
 
           {/* Main Content */}
-          <div className="lg:col-span-2">
-            <Tabs defaultValue="profile" className="space-y-6">
-              <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="profile">Profile</TabsTrigger>
-                <TabsTrigger value="security">Security</TabsTrigger>
-                <TabsTrigger value="settings">Settings</TabsTrigger>
+          <div className="lg:col-span-2 order-1 lg:order-2">
+            <Tabs defaultValue="profile" className="space-y-4 sm:space-y-6">
+              <TabsList className="grid w-full grid-cols-3 h-auto p-1">
+                <TabsTrigger value="profile" className="text-xs sm:text-sm py-2 px-2 sm:px-4">Profile</TabsTrigger>
+                <TabsTrigger value="security" className="text-xs sm:text-sm py-2 px-2 sm:px-4">Security</TabsTrigger>
+                <TabsTrigger value="settings" className="text-xs sm:text-sm py-2 px-2 sm:px-4">Settings</TabsTrigger>
               </TabsList>
 
               {/* Profile Tab */}
-              <TabsContent value="profile" className="space-y-6">
-                <Card className="card-premium">
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <CardTitle className="flex items-center space-x-2">
-                          <User className="h-5 w-5 text-primary" />
+              <TabsContent value="profile" className="space-y-4 sm:space-y-6">
+                <Card className="card-premium overflow-hidden">
+                  <CardHeader className="pb-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                      <div className="min-w-0 flex-1">
+                        <CardTitle className="flex items-center space-x-2 text-base sm:text-lg font-heading">
+                          <User className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
                           <span>Personal Information</span>
                         </CardTitle>
-                        <CardDescription>
+                        <CardDescription className="text-xs sm:text-sm mt-1">
                           Update your personal details and bio
                         </CardDescription>
                       </div>
@@ -225,71 +228,77 @@ const StudentProfile = () => {
                         variant="outline"
                         size="sm"
                         onClick={() => setIsEditing(!isEditing)}
+                        className="flex-shrink-0 text-xs sm:text-sm"
                       >
-                        <Edit className="h-4 w-4 mr-2" />
+                        <Edit className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                         {isEditing ? 'Cancel' : 'Edit'}
                       </Button>
                     </div>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="pt-0">
                     <div className="space-y-4">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                          <Label htmlFor="name">Full Name</Label>
+                          <Label htmlFor="name" className="text-xs sm:text-sm font-medium">Full Name</Label>
                           <Input
                             id="name"
                             value={profileData.name}
                             onChange={(e) => setProfileData({...profileData, name: e.target.value})}
                             disabled={!isEditing}
+                            className="text-sm"
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="email">Email</Label>
+                          <Label htmlFor="email" className="text-xs sm:text-sm font-medium">Email</Label>
                           <Input
                             id="email"
                             type="email"
                             value={profileData.email}
                             onChange={(e) => setProfileData({...profileData, email: e.target.value})}
                             disabled={!isEditing}
+                            className="text-sm"
                           />
                         </div>
                       </div>
                       
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                          <Label htmlFor="phone">Phone</Label>
+                          <Label htmlFor="phone" className="text-xs sm:text-sm font-medium">Phone</Label>
                           <Input
                             id="phone"
                             value={profileData.phone}
                             onChange={(e) => setProfileData({...profileData, phone: e.target.value})}
                             disabled={!isEditing}
+                            className="text-sm"
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="location">Location</Label>
+                          <Label htmlFor="location" className="text-xs sm:text-sm font-medium">Location</Label>
                           <Input
                             id="location"
                             value={profileData.location}
                             onChange={(e) => setProfileData({...profileData, location: e.target.value})}
                             disabled={!isEditing}
+                            className="text-sm"
                           />
                         </div>
                       </div>
                       
                       <div className="space-y-2">
-                        <Label htmlFor="bio">Bio</Label>
+                        <Label htmlFor="bio" className="text-xs sm:text-sm font-medium">Bio</Label>
                         <Textarea
                           id="bio"
                           value={profileData.bio}
                           onChange={(e) => setProfileData({...profileData, bio: e.target.value})}
                           disabled={!isEditing}
                           rows={3}
+                          className="text-sm resize-none"
                         />
                       </div>
                       
                       {isEditing && (
-                        <div className="flex justify-end">
-                          <Button onClick={handleSaveProfile} disabled={isLoading} className="btn-hero">
+                        <div className="flex justify-end pt-2">
+                          <Button onClick={handleSaveProfile} disabled={isLoading} className="btn-hero text-sm">
                             {isLoading ? (
                               <div className="flex items-center space-x-2">
                                 <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin"></div>
@@ -298,7 +307,8 @@ const StudentProfile = () => {
                             ) : (
                               <>
                                 <Save className="h-4 w-4 mr-2" />
-                                Save Changes
+                                <span className="hidden sm:inline">Save Changes</span>
+                                <span className="sm:hidden">Save</span>
                               </>
                             )}
                           </Button>
@@ -310,100 +320,106 @@ const StudentProfile = () => {
               </TabsContent>
 
               {/* Security Tab */}
-              <TabsContent value="security" className="space-y-6">
-                <Card className="card-premium">
-                  <CardHeader>
-                    <CardTitle className="flex items-center space-x-2">
-                      <Lock className="h-5 w-5 text-primary" />
+              <TabsContent value="security" className="space-y-4 sm:space-y-6">
+                <Card className="card-premium overflow-hidden">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="flex items-center space-x-2 text-base sm:text-lg font-heading">
+                      <Lock className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
                       <span>Change Password</span>
                     </CardTitle>
-                    <CardDescription>
+                    <CardDescription className="text-xs sm:text-sm mt-1">
                       Update your password to keep your account secure
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="pt-0">
                     <div className="space-y-4">
                       <div className="space-y-2">
-                        <Label htmlFor="current-password">Current Password</Label>
+                        <Label htmlFor="current-password" className="text-xs sm:text-sm font-medium">Current Password</Label>
                         <Input
                           id="current-password"
                           type="password"
                           value={passwordData.currentPassword}
                           onChange={(e) => setPasswordData({...passwordData, currentPassword: e.target.value})}
+                          className="text-sm"
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="new-password">New Password</Label>
+                        <Label htmlFor="new-password" className="text-xs sm:text-sm font-medium">New Password</Label>
                         <Input
                           id="new-password"
                           type="password"
                           value={passwordData.newPassword}
                           onChange={(e) => setPasswordData({...passwordData, newPassword: e.target.value})}
+                          className="text-sm"
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="confirm-password">Confirm New Password</Label>
+                        <Label htmlFor="confirm-password" className="text-xs sm:text-sm font-medium">Confirm New Password</Label>
                         <Input
                           id="confirm-password"
                           type="password"
                           value={passwordData.confirmPassword}
                           onChange={(e) => setPasswordData({...passwordData, confirmPassword: e.target.value})}
+                          className="text-sm"
                         />
                       </div>
-                      <Button onClick={handlePasswordChange} disabled={isLoading} className="btn-hero">
-                        {isLoading ? (
-                          <div className="flex items-center space-x-2">
-                            <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin"></div>
-                            <span>Updating...</span>
-                          </div>
-                        ) : (
-                          <>
-                            <Shield className="h-4 w-4 mr-2" />
-                            Update Password
-                          </>
-                        )}
-                      </Button>
+                      <div className="flex justify-end pt-2">
+                        <Button onClick={handlePasswordChange} disabled={isLoading} className="btn-hero text-sm">
+                          {isLoading ? (
+                            <div className="flex items-center space-x-2">
+                              <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin"></div>
+                              <span>Updating...</span>
+                            </div>
+                          ) : (
+                            <>
+                              <Shield className="h-4 w-4 mr-2" />
+                              <span className="hidden sm:inline">Update Password</span>
+                              <span className="sm:hidden">Update</span>
+                            </>
+                          )}
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
               </TabsContent>
 
               {/* Settings Tab */}
-              <TabsContent value="settings" className="space-y-6">
-                <Card className="card-premium">
-                  <CardHeader>
-                    <CardTitle className="flex items-center space-x-2">
-                      <Bell className="h-5 w-5 text-primary" />
+              <TabsContent value="settings" className="space-y-4 sm:space-y-6">
+                <Card className="card-premium overflow-hidden">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="flex items-center space-x-2 text-base sm:text-lg font-heading">
+                      <Bell className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
                       <span>Notifications</span>
                     </CardTitle>
-                    <CardDescription>
+                    <CardDescription className="text-xs sm:text-sm mt-1">
                       Manage your notification preferences
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="pt-0">
                     <div className="space-y-4">
-                      <div className="p-4 bg-muted/30 rounded-lg">
-                        <h4 className="font-semibold text-foreground mb-2">Email Notifications</h4>
-                        <p className="text-sm text-muted-foreground mb-4">
+                      <div className="p-3 sm:p-4 bg-muted/30 rounded-lg">
+                        <h4 className="font-heading text-sm sm:text-base font-semibold text-foreground mb-2">Email Notifications</h4>
+                        <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4 leading-relaxed">
                           Receive email updates about test schedules and results
                         </p>
-                        <Button variant="outline">Configure</Button>
+                        <Button variant="outline" size="sm" className="text-xs sm:text-sm">Configure</Button>
                       </div>
                       
-                      <div className="p-4 bg-muted/30 rounded-lg">
-                        <h4 className="font-semibold text-foreground mb-2">Push Notifications</h4>
-                        <p className="text-sm text-muted-foreground mb-4">
+                      <div className="p-3 sm:p-4 bg-muted/30 rounded-lg">
+                        <h4 className="font-heading text-sm sm:text-base font-semibold text-foreground mb-2">Push Notifications</h4>
+                        <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4 leading-relaxed">
                           Get real-time notifications on your device
                         </p>
-                        <Button variant="outline">Configure</Button>
+                        <Button variant="outline" size="sm" className="text-xs sm:text-sm">Configure</Button>
                       </div>
 
-                      <div className="p-4 bg-muted/30 rounded-lg">
-                        <h4 className="font-semibold text-foreground mb-2">Privacy Settings</h4>
-                        <p className="text-sm text-muted-foreground mb-4">
+                      <div className="p-3 sm:p-4 bg-muted/30 rounded-lg">
+                        <h4 className="font-heading text-sm sm:text-base font-semibold text-foreground mb-2">Privacy Settings</h4>
+                        <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4 leading-relaxed">
                           Control who can see your profile and achievements
                         </p>
-                        <Button variant="outline">Manage Privacy</Button>
+                        <Button variant="outline" size="sm" className="text-xs sm:text-sm">Manage Privacy</Button>
                       </div>
                     </div>
                   </CardContent>
